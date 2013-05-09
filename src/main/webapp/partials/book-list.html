@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="span3">
+    <!-- sidebar -->
+    <label>Search:</label>
+    <input type="text" id="searchInput" placeholder="title" data-ng-model="query" data-ng-change="search(query)" />
+    <a href="#/books/new">New Book</a>
+  </div>
+  <div class="span9">
+    <!-- body -->
+    <table class="table table-hover books">
+      <thead><tr><th>Books</th></tr></thead>
+      <tbody>
+        <tr data-ng-repeat="book in books">
+          <td><a href="#/books/{{book.id}}">{{book.title}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
