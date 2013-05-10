@@ -3,6 +3,7 @@ package com.zuhlke.angularjs.auth;
 import java.util.Collections;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
@@ -16,23 +17,31 @@ import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.zuhlke.angularjs.model.Staff;
+import com.zuhlke.angularjs.staff.StaffService;
+
 @Path("/authenticate")
 public class AuthenticationEndpoint {
 
 	final Logger logger = LoggerFactory.getLogger(AuthenticationEndpoint.class);
 	
+	@Inject StaffService staffService;
+	
 	@POST @Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
 	public Map<String, String> authenticate(LoginForm loginForm, @Context HttpServletRequest request) {
 		try {
-			String username = loginForm.getUsername();
-			String password = loginForm.getPassword();
-			request.login(username, password);
-			return Collections.singletonMap("authToken", new AuthenticationToken(username, password).toEncyptedToken());
-			
+			Staff staff = staffService.getStaffByUsername(loginForm.getUsername());
+			if (!staff.getPassword().equals(loginForm.getPassword())) {
+				throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+			}
+			AuthenticationToken token = new AuthenticationToken(staff.getUsername(), staff.getPassword());
+			return Collections.singletonMap("authToken", token.toEncyptedToken());
+
 		} catch (Exception e) {
-			logger.warn("failed login attempt", e);
-			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+			logger.error(e.getMessage(), e);
+			throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
 		}
+	
 	}
 	
 }

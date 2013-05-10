@@ -24,7 +24,6 @@ public class StaffService {
 	public void init() {
 		// for demo application create staff on start up
 		createStaff("neil", "password", "Neil Moorcroft");
-		createStaff("lynne", "password", "Lynne Johnson");
 		createStaff("kev", "password", "Kevin Denver");
 		
 	}

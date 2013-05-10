@@ -42,12 +42,8 @@ libraryApp.config(function($httpProvider) {
 
 libraryApp.config(function($httpProvider) {
 	function authTransform(data, headersGetter) {
-		var $rootScope = angular.element(document).injector().get('$rootScope');
 		var $cookieStore = angular.element(document).injector().get('$cookieStore');
-		var authToken = $rootScope.authToken;
-		if (_.isUndefined(authToken)) {
-			authToken = $cookieStore.get('authToken');
-		}
+		authToken = $cookieStore.get('authToken');
 		if (!_.isUndefined(authToken)) {
 			var headers = headersGetter();
 			headers['Authorization'] = authToken;

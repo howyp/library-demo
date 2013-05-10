@@ -1,10 +1,9 @@
-function LoginCtrl($scope, $rootScope, $http, $location, $cookieStore) {
+function LoginCtrl($scope, $http, $location, $cookieStore) {
 	$scope.login = function(user) {
 			$http.post("api/authenticate", {
 				username : user.username,
 				password : user.password
 			}).success(function(data) {
-			$rootScope.authToken = data.authToken;
 			$cookieStore.put('authToken', data.authToken);
 			$location.path("/");
 		}).error(function(data) {

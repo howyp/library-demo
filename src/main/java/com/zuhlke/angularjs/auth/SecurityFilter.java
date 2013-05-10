@@ -2,6 +2,7 @@ package com.zuhlke.angularjs.auth;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -15,10 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.zuhlke.angularjs.model.Staff;
+import com.zuhlke.angularjs.staff.StaffService;
+
 @WebFilter("/api/*")
 public class SecurityFilter implements Filter {
 
 	final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
+	
+	@Inject StaffService staffService;
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
@@ -41,16 +47,19 @@ public class SecurityFilter implements Filter {
 		// attempt to login using encrypted credentials
 		try {
 			AuthenticationToken token = new AuthenticationToken(authz);
-			req.login(token.getUsername(), token.getPassword()); // or via an internal service?
+			Staff staff = staffService.getStaffByUsername(token.getUsername());
+			if (!staff.getPassword().equals(token.getPassword())) {
+				// invalid password, sending UNAUTHORIZED
+				resp.sendError(401);
+			}
+			// authentication ok - add current user to request scope
+			request.setAttribute("currentUser", staff);
 			chain.doFilter(request, response);
 		
 		} catch (AuthenticationException e) {
 			// failed to decrypt token, sending UNAUTHORIZED
 			resp.sendError(401);
 			
-		} catch (ServletException e) {
-			// login failed, sending FORBIDDEN
-			resp.sendError(403);
 		}
 		
 		
