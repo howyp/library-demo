@@ -32,6 +32,10 @@ public class Book implements Serializable {
 	@Basic(optional = false) 
 	@Column(name = "isbn")
 	private String isbn;
+
+	@Basic(optional = false) 
+	@Column(name = "author")
+	private String author;
 	
 	Book() { }
 	
@@ -57,6 +61,14 @@ public class Book implements Serializable {
 	
 	public void setIsbn(String isbn) {
 		this.isbn = isbn;
+	}
+	
+	public String getAuthor() {
+		return author;
+	}
+	
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 	
 	@Override
