@@ -1,6 +1,6 @@
 function LoginCtrl($scope, $http, $location, $cookieStore) {
 	$scope.login = function(user) {
-			$http.post("api/authenticate", {
+			$http.put("api/authenticate", {
 				username : user.username,
 				password : user.password
 			}).success(function(data) {
@@ -47,8 +47,8 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 
 }
 
-function LogoutCtrl($rootScope, $location) {
-	$rootScope.authToken = undefined;
+function LogoutCtrl($cookieStore, $location) {
+	$cookieStore.remove("authToken");
 	$location.path("/");
 }
 
