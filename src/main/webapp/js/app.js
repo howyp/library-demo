@@ -13,8 +13,6 @@ libraryApp.config(function($routeProvider) {
 	}).when('/books/:bookId', {
 		templateUrl : 'partials/book-detail.html',
 		controller : BookDetailCtrl
-	}).when('/logout', {
-		resolve : { controller : LogoutCtrl }
 	}).otherwise({
 		redirectTo : '/books'
 	});
@@ -37,28 +35,8 @@ libraryApp.config(function($httpProvider) {
 		};
 	}
 	$httpProvider.responseInterceptors.push(authInterceptor);
+	
 });
-
-
-libraryApp.config(function($httpProvider) {
-	function authTransform(data, headersGetter) {
-		var $cookieStore = angular.element(document).injector().get('$cookieStore');
-		authToken = $cookieStore.get('authToken');
-		if (!_.isUndefined(authToken)) {
-			var headers = headersGetter();
-			headers['Authorization'] = authToken;
-		}
-		return data;
-	}
-	$httpProvider.defaults.transformRequest.push(authTransform);
-
-});
-
-
-
-
-
-
 
 
 

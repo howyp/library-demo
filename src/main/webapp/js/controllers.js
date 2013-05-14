@@ -1,14 +1,16 @@
-function LoginCtrl($scope, $http, $location, $cookieStore) {
+function LoginCtrl($scope, $http, $location, $cookies) {
 	$scope.login = function(user) {
-			$http.put("api/authenticate", {
-				username : user.username,
-				password : user.password
-			}).success(function(data) {
-			$cookieStore.put('authToken', data.authToken);
-			$location.path("/");
+		$http.post("api/authenticate", {
+			username : user.username,
+			password : user.password
+
+		}).success(function(data) {
+			$location.path("/books");
+
 		}).error(function(data) {
 			$scope.error = "Invalid username or password.";
 			user.password = undefined;
+
 		});
 	};
 
@@ -46,12 +48,5 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 	$('#inputTitle').focus();
 
 }
-
-function LogoutCtrl($cookieStore, $location) {
-	$cookieStore.remove("authToken");
-	$location.path("/");
-}
-
-
 
 

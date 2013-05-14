@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,44 +25,48 @@ public class SecurityFilter implements Filter {
 
 	final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);
 	
-	@Inject StaffService staffService;
+	@Inject 
+	private StaffService staffService;
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 		
-		// allow access to authentication service
 		if (req.getRequestURI().equals(req.getContextPath() + "/api/authenticate")) {
 			chain.doFilter(request, response);
 			return;
 		}
 
-		// otherwise Authorisation header must be provided
-		String authz = req.getHeader("Authorization");
+		String authz = null;
+		if (req.getCookies() != null) {
+			for (Cookie c : req.getCookies()) {
+				if (c.getName().equals("authToken")) {
+					authz = c.getValue();
+				}
+			}
+		}		
+		
+		logger.info("auth token {}", authz);
+		
 		if (authz == null) {
 			resp.sendError(401);
 			return;
 		}
 		
-		// attempt to login using encrypted credentials
 		try {
 			AuthenticationToken token = new AuthenticationToken(authz);
 			Staff staff = staffService.getStaffByUsername(token.getUsername());
 			if (!staff.getPassword().equals(token.getPassword())) {
-				// invalid password, sending UNAUTHORIZED
 				resp.sendError(401);
 			}
-			// authentication ok - add current user to request scope
 			request.setAttribute("currentUser", staff);
 			chain.doFilter(request, response);
 		
 		} catch (AuthenticationException e) {
-			// failed to decrypt token, sending UNAUTHORIZED
 			resp.sendError(401);
 			
 		}
-		
 		
 	}
 
