@@ -15,6 +15,8 @@ files = [
   'mocks.js',
   'karma.src.js',
   '../../../js/app.js',
+  '../../../js/controllers.js',
+  '../../../js/services.js',
   '../unit/controllers/controllersTests.js',
   'angular-mocks.js',
   '*.spec.js'
