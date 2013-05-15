@@ -12,15 +12,15 @@ files = [
   JASMINE_ADAPTER,
   'lib/mocks.js',
   'lib/karma.js',
-  '../../main/webapp/js/jquery/jquery-*.js',
-  '../../main/webapp/js/angularjs/angular.js',
-  '../../main/webapp/js/angularjs/angular-*.js',
-  '../../main/webapp/js/underscore/*.js',
+  '../../main/webapp/js/lib/jquery-*.js',
+  '../../main/webapp/js/lib/angular.js',
+  '../../main/webapp/js/lib/angular-*.js',
+  '../../main/webapp/js/lib/underscore-min.js',
   '../../main/webapp/js/app.js',
   '../../main/webapp/js/controllers.js',
   '../../main/webapp/js/services.js',
   'lib/angular-mocks.js',
-  'unit/controllers/*.spec.js',
+  'unit/**/*.spec.js',
 ];
 
 
