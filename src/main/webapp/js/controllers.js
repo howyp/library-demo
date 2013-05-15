@@ -1,4 +1,4 @@
-function LoginCtrl($scope, $http, $location, $cookies) {
+function LoginCtrl($scope, $http, $location) {
 	$scope.login = function(user) {
 		$http.post("api/authenticate", {
 			username : user.username,

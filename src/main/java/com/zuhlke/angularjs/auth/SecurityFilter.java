@@ -32,7 +32,7 @@ public class SecurityFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
-		
+				
 		if (req.getRequestURI().equals(req.getContextPath() + "/api/authenticate")) {
 			chain.doFilter(request, response);
 			return;
