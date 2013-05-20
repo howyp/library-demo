@@ -28,10 +28,13 @@ public class AuthenticationEndpoint {
 	
 	@POST @Consumes(MediaType.APPLICATION_JSON) @Produces(MediaType.APPLICATION_JSON)
 	public Response authenticate(LoginForm loginForm, @Context HttpServletRequest request) {
+
 		Staff staff = staffService.getStaffByUsername(loginForm.getUsername());
+		
 		if (staff == null || !staff.getPassword().equals(loginForm.getPassword())) {
 			throw new WebApplicationException(Response.Status.UNAUTHORIZED);
 		}
+		
 		try {
 			AuthenticationToken token = new AuthenticationToken(staff.getUsername(), staff.getPassword());
 			return Response.ok().cookie(new NewCookie("authToken", token.toEncyptedToken())).build();

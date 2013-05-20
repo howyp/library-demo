@@ -2,6 +2,7 @@ package com.zuhlke.angularjs.book;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
@@ -20,6 +21,15 @@ public class BookService {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@PostConstruct
+	public void init() {
+		// for demo application create staff on start up
+		createBook("Domain-Driven Design", "Eric Evans", "0-321-12521-5");
+		createBook("Service-Oriented Architecture", "Thomas Erl", "0-13-185858-0");
+		createBook("Java Persistence with Hibernate", "Christian Bauer, Gavin King", "1-932394-88-5");
+		
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Book> getBooks() {
 		return em.createQuery("select b from Book b order by b.title").getResultList();
@@ -27,8 +37,8 @@ public class BookService {
 	
 	@SuppressWarnings("unchecked") 
 	public List<Book> getBooks(String query) {
-		return em.createQuery("select b from Book b where b.title like :query order by b.title")
-				.setParameter("query", query + "%")
+		return em.createQuery("select b from Book b where lower(b.title) like :query or lower(b.author) like :query order by b.title")
+				.setParameter("query", "%" + query.toLowerCase() + "%")
 				.getResultList();
 	}
 	
@@ -39,6 +49,10 @@ public class BookService {
     public void saveBook(Book book) {
     	logger.info("saving book {}", book);
         em.merge(book);
+    }
+    
+    public void createBook(String title, String author, String isbn) {
+    	saveBook(new Book(title, author, isbn));
     }
 	
 

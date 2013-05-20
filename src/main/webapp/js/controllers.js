@@ -18,14 +18,34 @@ function LoginCtrl($scope, $http, $location) {
 
 }
 
-function BookListCtrl($scope, bookService) {
+function BookListCtrl($scope, $location, bookService) {
 	$scope.books = bookService.query();
+	
 	$scope.search = function(query) {
 		$scope.books = bookService.query({
 			q : query
+		}, function() {
+			$scope.showClear = !_.isEmpty(query);
 		});
 	};
+	
+	$scope.changeSearch = function(query) {
+		if (_.isEmpty(query)) {
+			$scope.showClear = false;
+		}
+	};
+	
+	$scope.searchIcon = function() {
+		if ($scope.showClear) {
+			$scope.query = '';
+		}
+		$scope.search($scope.query);
+	};
 
+	$scope.select = function(id) {
+		$location.path("/books/"+id);
+	};
+	
 }
 
 function BookDetailCtrl($scope, $routeParams, $location, bookService) {

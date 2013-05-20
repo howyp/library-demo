@@ -1,21 +1,21 @@
-<form class="form-horizontal">
+<form id="bookDetailForm" class="form-horizontal">
   <input type="hidden" data-ng-model="book.id"/>
   <div class="control-group">
     <label class="control-label" for="inputTitle">Title</label>
     <div class="controls">
-      <input type="text" id="inputTitle" class="input-large" data-ng-model="book.title">
-    </div>
-  </div>
-  <div class="control-group">
-    <label class="control-label" for="inputIsbn">ISBN</label>
-    <div class="controls">
-      <input type="text" id="inputIsbn" class="input-large" data-ng-model="book.isbn">
+      <input type="text" id="inputTitle" data-ng-model="book.title">
     </div>
   </div>
   <div class="control-group">
     <label class="control-label" for="inputAuthor">Author</label>
     <div class="controls">
-      <input type="text" id="inputIsbn" class="input-large" data-ng-model="book.author">
+      <input type="text" id="inputAuthor" data-ng-model="book.author">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="inputIsbn">ISBN</label>
+    <div class="controls">
+      <input type="text" id="inputIsbn" data-ng-model="book.isbn">
     </div>
   </div>
   <div class="control-group">
