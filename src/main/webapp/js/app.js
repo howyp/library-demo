@@ -38,6 +38,12 @@ libraryApp.config(function($httpProvider) {
 	
 });
 
+libraryApp.directive('navbar', function() {
+	return {
+	    templateUrl: "partials/navbar.html"
+	};
+});
+
 
 
 

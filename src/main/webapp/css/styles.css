@@ -3,3 +3,5 @@ tr.book-row:hover { cursor: pointer; }
 #bookDetailForm input#inputTitle { width: 375px; }
 #bookDetailForm input#inputAuthor { width: 375px; }
 #bookDetailForm input#inputIsbn { width: 220px; }
+table.books th.title, td.title { width: 60%; }
+table.books th.author, td.author { width: 40%; }

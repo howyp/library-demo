@@ -1,3 +1,5 @@
+<div data-navbar></div>
+
 <div class="row">
 	<div class="span9"></div>
 	<div class="span3">
@@ -21,15 +23,15 @@
 		<table class="table table-hover books">
 			<thead>
 				<tr>
-					<th>Title</th>
-					<th>Author</th>
+					<th class="title">Title</th>
+					<th class="author">Author</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr data-ng-repeat="book in books" class="book-row"
 					data-ng-click="select(book.id)">
-					<td>{{book.title}}</td>
-					<td>{{book.author}}</td>
+					<td class="title">{{book.title}}</td>
+					<td class="author">{{book.author}}</td>
 				</tr>
 			</tbody>
 		</table>

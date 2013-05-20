@@ -20,6 +20,7 @@ function LoginCtrl($scope, $http, $location) {
 
 function BookListCtrl($scope, $location, bookService) {
 	$scope.books = bookService.query();
+	$scope.query = '';
 	
 	$scope.search = function(query) {
 		$scope.books = bookService.query({
