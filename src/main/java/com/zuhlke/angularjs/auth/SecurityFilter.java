@@ -10,10 +10,10 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Base64;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,21 +33,7 @@ public class SecurityFilter implements Filter {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) response;
 				
-		if (req.getRequestURI().equals(req.getContextPath() + "/api/authenticate")) {
-			chain.doFilter(request, response);
-			return;
-		}
-
-		String authz = null;
-		if (req.getCookies() != null) {
-			for (Cookie c : req.getCookies()) {
-				if (c.getName().equals("authToken")) {
-					authz = c.getValue();
-				}
-			}
-		}		
-		
-		logger.info("auth token {}", authz);
+		String authz = req.getHeader("Authorization");
 		
 		if (authz == null) {
 			resp.sendError(401);
@@ -55,15 +41,18 @@ public class SecurityFilter implements Filter {
 		}
 		
 		try {
-			AuthenticationToken token = new AuthenticationToken(authz);
-			Staff staff = staffService.getStaffByUsername(token.getUsername());
-			if (!staff.getPassword().equals(token.getPassword())) {
+			String authzToken = authz.substring(6);
+			String[] credentials = new String(Base64.decodeBase64(authzToken.getBytes())).split(":");
+			logger.info("authz credentials {} {}", credentials[0], credentials[1]);
+			
+			Staff staff = staffService.getStaffByUsername(credentials[0]);
+			if (!staff.getPassword().equals(credentials[1])) {
 				resp.sendError(401);
 			}
 			request.setAttribute("currentUser", staff);
 			chain.doFilter(request, response);
 		
-		} catch (AuthenticationException e) {
+		} catch (Exception e) {
 			resp.sendError(401);
 			
 		}
