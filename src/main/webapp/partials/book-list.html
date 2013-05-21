@@ -1,4 +1,4 @@
-<div data-navbar></div>
+<div data-navbar data-selected="home"></div>
 
 <div class="row">
 	<div class="span9"></div>
@@ -7,7 +7,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<div class="input-append">
-					<input type="text" id="searchInput" placeholder="Search Books" data-ng-model="query" data-ng-change="changeSearch(query)" />
+					<input type="text" id="searchInput" placeholder="Search Books" data-ng-model="query" />
 					<span class="add-on" data-ng-click="searchIcon()">
 						<i class="icon-search" data-ng-show="!showClear"></i>
 						<i class="icon-remove-sign" data-ng-show="showClear"></i>

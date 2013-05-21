@@ -40,7 +40,13 @@ libraryApp.config(function($httpProvider) {
 
 libraryApp.directive('navbar', function() {
 	return {
-	    templateUrl: "partials/navbar.html"
+		replace: true,
+	    templateUrl: "partials/navbar.html", 
+	    link: function(scope, element, attrs) {
+	    	$(element).find('ul.nav li').each(function() {
+	    		if ($(this).hasClass(attrs.selected)) $(this).addClass('active');
+	    	});
+	    }
 	};
 });
 

@@ -30,12 +30,12 @@ function BookListCtrl($scope, $location, bookService) {
 		});
 	};
 	
-	$scope.changeSearch = function(query) {
-		if (_.isEmpty(query)) {
+	$scope.$watch('query', function() {
+		if (_.isEmpty($scope.query)) {
 			$scope.showClear = false;
 		}
-	};
-	
+	});
+		
 	$scope.searchIcon = function() {
 		if ($scope.showClear) {
 			$scope.query = '';
