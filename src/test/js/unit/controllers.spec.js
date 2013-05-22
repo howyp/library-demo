@@ -15,7 +15,7 @@ describe("Controllers", function() {
 			expect(scope.search).toBeDefined();
 			
 		}));
-
+		/*
 		it('should search books from bookService', inject(function($rootScope, $controller) {
 
 			var scope = $rootScope.$new();
@@ -29,6 +29,7 @@ describe("Controllers", function() {
 			expect(mockBookService.query).toHaveBeenCalledWith( { q : 'query' });
 			
 		}));
+		*/
 	});
 
 	describe('LoginCtrl', function() {
@@ -39,9 +40,7 @@ describe("Controllers", function() {
 
 			$controller(LoginCtrl, { $scope : scope });
 
-			var expected = { username : 'username', password : 'password' };
-			
-			$httpBackend.expectPOST('api/authenticate', expected).respond();
+			$httpBackend.expectGET('api/authenticate').respond();
 
 			spyOn($location, 'path');
 			
