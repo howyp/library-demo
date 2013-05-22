@@ -18,6 +18,14 @@ libraryApp.config(function($routeProvider) {
 	});
 });
 
+libraryApp.run(function($rootScope, $location, userService) {
+	$rootScope.$on('$routeChangeStart', function(event, next, current) {
+		if (next.templateUrl != "partials/login.html" && !userService.isLoggedIn()) {
+			$location.path('/login');
+		}
+	});
+});
+
 libraryApp.config(function($httpProvider) {
 	function authInterceptor($q, $log, $location) {
 		function success(response) {
