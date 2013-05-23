@@ -20,7 +20,7 @@ libraryApp.config(function($routeProvider) {
 
 libraryApp.run(function($rootScope, $location, userService) {
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
-		if (next.templateUrl != "partials/login.html" && !userService.isLoggedIn()) {
+		if (next.templateUrl !== "partials/login.html" && !userService.isLoggedIn()) {
 			$location.path('/login');
 		}
 	});
@@ -36,29 +36,27 @@ libraryApp.config(function($httpProvider) {
 			if (status == 401) {
 				$location.path("/login");
 			}
-			return $q.reject(response); 
+			return $q.reject(response);
 		}
 		return function(promise) {
 			return promise.then(success, error);
 		};
 	}
 	$httpProvider.responseInterceptors.push(authInterceptor);
-	
+
 });
 
 libraryApp.directive('navbar', function(userService) {
 	return {
-		replace: true,
-	    templateUrl: "partials/navbar.html", 
-	    link: function(scope, element, attrs) {
-	    	scope.fullName = userService.currentUser.name;
-	    	$(element).find('ul.nav li').each(function() {
-	    		if ($(this).hasClass(attrs.selected)) $(this).addClass('active');
-	    	});
-	    }
+		replace : true,
+		templateUrl : "partials/navbar.html",
+		link : function(scope, element, attrs) {
+			scope.fullName = userService.currentUser.name;
+			$(element).find('ul.nav li').each(function() {
+				if ($(this).hasClass(attrs.selected)) {
+					$(this).addClass('active');
+				}
+			});
+		}
 	};
 });
-
-
-
-

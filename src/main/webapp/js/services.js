@@ -8,7 +8,7 @@ libraryServices.factory('userService', function() {
 	return { 
 		currentUser : null,
 		isLoggedIn : function() {
-			return this.currentUser != null;
+			return this.currentUser !== null;
 		}
 	};
 });

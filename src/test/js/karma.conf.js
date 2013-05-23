@@ -3,26 +3,29 @@
 
 
 // base path, that will be used to resolve files and exclude
-basePath = '';
+basePath = '../../../';
 
 
 // list of files / patterns to load in the browser
 files = [
   JASMINE,
   JASMINE_ADAPTER,
-  'lib/mocks.js',
-  'lib/karma.js',
-  '../../main/webapp/js/lib/jquery-*.js',
-  '../../main/webapp/js/lib/angular.js',
-  '../../main/webapp/js/lib/angular-*.js',
-  '../../main/webapp/js/lib/underscore-min.js',
-  '../../main/webapp/js/app.js',
-  '../../main/webapp/js/controllers.js',
-  '../../main/webapp/js/services.js',
-  'lib/angular-mocks.js',
-  'unit/**/*.spec.js',
+  'src/test/js/lib/mocks.js',
+  'src/test/js/lib/karma.js',
+  'src/main/webapp/js/lib/jquery-*.js',
+  'src/main/webapp/js/lib/angular.js',
+  'src/main/webapp/js/lib/angular-*.js',
+  'src/main/webapp/js/lib/underscore-min.js',
+  'src/main/webapp/js/app.js',
+  'src/main/webapp/js/controllers.js',
+  'src/main/webapp/js/services.js',
+  'src/test/js/lib/angular-mocks.js',
+  'src/test/js/unit/**/*.spec.js',
 ];
 
+preprocessors = {
+  'src/main/webapp/js/*.js' : 'coverage'
+};
 
 // list of files to exclude
 exclude = [
@@ -32,8 +35,16 @@ exclude = [
 
 // test results reporter to use
 // possible values: 'dots', 'progress', 'junit'
-reporters = ['progress'];
+reporters = ['dots', 'junit', 'coverage'];
 
+coverageReporter = {
+  type : 'html',
+  dir : 'target/coverage/'
+};
+
+junitReporter = {
+  outputFile: 'target/test-results.xml'
+};
 
 // web server port
 port = 9876;
@@ -64,7 +75,7 @@ autoWatch = true;
 // - Safari (only Mac)
 // - PhantomJS
 // - IE (only Windows)
-browsers = ['Chrome','IE'];
+browsers = ['Chrome'];
 
 
 // If browser does not capture in given timeout [ms], kill it

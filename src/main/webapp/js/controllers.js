@@ -12,7 +12,7 @@ function LoginCtrl($scope, $http, $location, userService) {
 
 	$scope.$watch('user.username + user.password', function() {
 		if (_.isUndefined($scope.user)) return;
-        $http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode($scope.user.username + ':' + $scope.user.password);
+        $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode($scope.user.username + ':' + $scope.user.password);
     });
 	
 	$('#inputUsername').focus();
