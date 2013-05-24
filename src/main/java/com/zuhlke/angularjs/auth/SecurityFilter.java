@@ -42,7 +42,6 @@ public class SecurityFilter implements Filter {
 		
 		String authzToken = authz.substring(6);
 		String[] credentials = new String(Base64.decodeBase64(authzToken.getBytes())).split(":");
-		logger.info("authz credentials {} {}", credentials[0], credentials[1]);
 		
 		Staff staff = staffService.getStaffByUsername(credentials[0]);
 		if (staff == null || !staff.getPassword().equals(credentials[1])) {
