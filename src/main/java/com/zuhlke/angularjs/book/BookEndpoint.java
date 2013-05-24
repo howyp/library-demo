@@ -46,7 +46,8 @@ public class BookEndpoint {
 
     @POST @Consumes(MediaType.APPLICATION_JSON)
     public void saveBook(Book book) {
-        bookService.saveBook(book);
+    	throw new IllegalStateException("arrgggggg");
+        //bookService.saveBook(book);
     }
 
 

@@ -2,20 +2,25 @@ var libraryApp = angular.module('library', [ 'libraryServices', 'ngCookies' ]);
 
 libraryApp.config(function($routeProvider) {
 	$routeProvider.when('/login', {
-		templateUrl : 'partials/login.html',
-		controller : LoginCtrl
+		controller : LoginCtrl,
+		templateUrl : 'partials/login.html'
+	
 	}).when('/books', {
-		templateUrl : 'partials/book-list.html',
-		controller : BookListCtrl
+		controller : BookListCtrl,
+		templateUrl : 'partials/book-list.html'
+	
 	}).when('/books/new', {
-		templateUrl : 'partials/book-detail.html',
-		controller : BookDetailCtrl
+		controller : BookDetailCtrl,
+		templateUrl : 'partials/book-detail.html'
+
 	}).when('/books/:bookId', {
-		templateUrl : 'partials/book-detail.html',
-		controller : BookDetailCtrl
+		controller : BookDetailCtrl,
+		templateUrl : 'partials/book-detail.html'
+
 	}).otherwise({
 		redirectTo : '/books'
 	});
+
 });
 
 libraryApp.run(function($rootScope, $location, userService) {
@@ -27,14 +32,15 @@ libraryApp.run(function($rootScope, $location, userService) {
 });
 
 libraryApp.config(function($httpProvider) {
-	function authInterceptor($q, $log, $location) {
+	function errorInterceptor($q, $log, $location) {
 		function success(response) {
 			return response;
 		}
 		function error(response) {
-			var status = response.status;
-			if (status == 401) {
-				$location.path("/login");
+			if (response.status == 500) {
+				$('#error-dialog').modal().on('hidden', function() {
+					window.location = '.';
+				});
 			}
 			return $q.reject(response);
 		}
@@ -42,7 +48,7 @@ libraryApp.config(function($httpProvider) {
 			return promise.then(success, error);
 		};
 	}
-	$httpProvider.responseInterceptors.push(authInterceptor);
+	$httpProvider.responseInterceptors.push(errorInterceptor);
 
 });
 

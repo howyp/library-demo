@@ -25,6 +25,7 @@ public class StaffService {
 		// for demo application create staff on start up
 		createStaff("neil", "password", "Neil Moorcroft");
 		createStaff("kev", "password", "Kevin Denver");
+		createStaff("admin", "password", "Administrator");
 		
 	}
 	

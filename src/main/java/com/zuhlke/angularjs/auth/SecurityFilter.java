@@ -40,23 +40,19 @@ public class SecurityFilter implements Filter {
 			return;
 		}
 		
-		try {
-			String authzToken = authz.substring(6);
-			String[] credentials = new String(Base64.decodeBase64(authzToken.getBytes())).split(":");
-			logger.info("authz credentials {} {}", credentials[0], credentials[1]);
-			
-			Staff staff = staffService.getStaffByUsername(credentials[0]);
-			if (!staff.getPassword().equals(credentials[1])) {
-				resp.sendError(401);
-			}
-			request.setAttribute("currentUser", staff);
-			chain.doFilter(request, response);
+		String authzToken = authz.substring(6);
+		String[] credentials = new String(Base64.decodeBase64(authzToken.getBytes())).split(":");
+		logger.info("authz credentials {} {}", credentials[0], credentials[1]);
 		
-		} catch (Exception e) {
+		Staff staff = staffService.getStaffByUsername(credentials[0]);
+		if (!staff.getPassword().equals(credentials[1])) {
 			resp.sendError(401);
-			
 		}
-		
+
+		request.setAttribute("currentUser", staff);
+	
+		chain.doFilter(request, response);
+
 	}
 
 	@Override

@@ -7,12 +7,24 @@
 </head>
 <body>
 	<div class="container" data-ng-view></div>
+	<div id="error-dialog" class="modal hide fade">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">×</button>
+			<h3 id="myModalLabel">System Error</h3>
+		</div>
+		<div class="modal-body">
+			<p>Whoops! An unexpected error has occurred.</p>
+		</div>
+		<div class="modal-footer">
+			<button class="btn" data-dismiss="modal">Close</button>
+		</div>
+	</div>
 	<script src="js/lib/underscore-min.js"></script>
 	<script src="js/lib/jquery-1.9.1.min.js"></script>
 	<script src="js/lib/angular.js"></script>
 	<script src="js/lib/angular-resource.min.js"></script>
 	<script src="js/lib/angular-cookies.min.js"></script>
-	<script src="js/lib/bootstrap.js"></script>
+	<script src="js/lib/bootstrap.min.js"></script>
 	<script src="js/lib/bootstrap-dropdown.js"></script>
 	<script src="js/lib/base64.js"></script>
 	<script src="js/app.js"></script>

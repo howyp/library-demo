@@ -14,6 +14,7 @@ describe("Controllers", function() {
 			
 			expect(mockBookService.query).toHaveBeenCalled();
 			expect(scope.search).toBeDefined();
+			expect(scope.searchIcon).toBeDefined();
 			
 		});
 
