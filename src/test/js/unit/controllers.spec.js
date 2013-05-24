@@ -25,6 +25,30 @@ describe("Controllers", function() {
 			
 		});
 
+		it('should clear search when icon clear clicked', function() {
+
+			spyOn(scope, 'search');
+			scope.showClear = true;
+			scope.query = 'query';
+			
+			scope.searchIcon();
+			
+			expect(scope.search).toHaveBeenCalledWith( '' );
+			
+		});
+
+		it('should execute search when icon search clicked', function() {
+
+			spyOn(scope, 'search');
+			scope.showClear = false;
+			scope.query = 'query';
+			
+			scope.searchIcon();
+			
+			expect(scope.search).toHaveBeenCalledWith( 'query' );
+			
+		});
+
 	});
 
 	describe('LoginCtrl', function() {
@@ -49,6 +73,42 @@ describe("Controllers", function() {
 
 			$httpBackend.verifyNoOutstandingExpectation();
 			$httpBackend.verifyNoOutstandingRequest();
+
+			
+		}));
+
+		it('should display error for invalid username/password', inject(function($httpBackend, $rootScope, $controller, $location) {
+
+			var scope = $rootScope.$new();
+			
+			var mockUserService = { };
+
+			$controller(LoginCtrl, { $scope : scope, userService : mockUserService });
+
+			$httpBackend.expectGET('api/authenticate').respond( 401, '');
+
+			scope.login({ username: 'username', password : 'password' });
+
+			$httpBackend.flush();
+
+			expect(scope.error).toBe('Invalid username or password.');
+
+			$httpBackend.verifyNoOutstandingExpectation();
+			$httpBackend.verifyNoOutstandingRequest();
+
+			
+		}));
+
+		it('should set headers when user changes', inject(function($httpBackend, $rootScope, $controller, $location) {
+
+			var scope = $rootScope.$new();
+			
+			var mockUserService = { };
+
+			$controller(LoginCtrl, { $scope : scope, userService : mockUserService });
+			
+			scope.user = {};
+			scope.user.username = "neil";
 
 			
 		}));

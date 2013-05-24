@@ -23,7 +23,7 @@ public class BookService {
 	
 	@PostConstruct
 	public void init() {
-		// for demo application create staff on start up
+		// for demo application create books on start up
 		createBook("Domain-Driven Design", "Eric Evans", "0-321-12521-5");
 		createBook("Service-Oriented Architecture", "Thomas Erl", "0-13-185858-0");
 		createBook("Java Persistence with Hibernate", "Christian Bauer, Gavin King", "1-932394-88-5");
