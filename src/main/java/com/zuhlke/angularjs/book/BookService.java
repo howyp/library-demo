@@ -47,8 +47,11 @@ public class BookService {
 	}
 
     public void saveBook(Book book) {
-    	logger.info("saving book {}", book);
         em.merge(book);
+    }
+    
+    public void deleteBook(Long id) {
+    	em.remove(em.getReference(Book.class, id));
     }
     
     public void createBook(String title, String author, String isbn) {

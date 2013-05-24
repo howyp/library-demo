@@ -45,8 +45,9 @@ public class SecurityFilter implements Filter {
 		logger.info("authz credentials {} {}", credentials[0], credentials[1]);
 		
 		Staff staff = staffService.getStaffByUsername(credentials[0]);
-		if (!staff.getPassword().equals(credentials[1])) {
+		if (staff == null || !staff.getPassword().equals(credentials[1])) {
 			resp.sendError(401);
+			return;
 		}
 
 		request.setAttribute("currentUser", staff);

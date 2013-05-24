@@ -37,7 +37,7 @@ libraryApp.config(function($httpProvider) {
 			return response;
 		}
 		function error(response) {
-			if (response.status == 500) {
+			if (_.contains([404, 415, 500], response.status)) {
 				$('#error-dialog').modal().on('hidden', function() {
 					window.location = '.';
 				});

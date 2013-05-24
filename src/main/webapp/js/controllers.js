@@ -63,6 +63,12 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 		});
 	};
 
+	$scope.remove = function(id) {
+		bookService.remove({ bookId : id }, function() {
+			$location.path("/books");
+		});
+	};
+
 	$scope.cancel = function() {
 		$location.path("/books");
 	};

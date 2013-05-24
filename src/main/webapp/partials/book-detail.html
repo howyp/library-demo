@@ -22,7 +22,8 @@
   </div>
   <div class="control-group">
     <div class="controls">
-      <button type="button" class="btn" data-ng-click="save(book)">Save</button>
+      <button type="button" class="btn btn-success" data-ng-click="save(book)">Save</button>
+      <button type="button" class="btn btn-danger" data-ng-click="remove(book.id)" data-ng-show="book.id">Delete</button>
       <button type="button" class="btn" data-ng-click="cancel()">Cancel</button>
     </div>
   </div>  
