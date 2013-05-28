@@ -25,10 +25,11 @@ public class MemberService {
 		return em.createQuery("select m from Member m order by m.name").getResultList();
 	}
 	
-	public void updateMember(Member member) {
-		em.merge(member);
+	public Member getMemberByMembershipNumber(String number) {
+		return (Member) em.createQuery("select m from Member m where n.membershipNumber = :number")
+				.setParameter("number", number)
+				.getSingleResult();
 	}
-	
 
 }
 

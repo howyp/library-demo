@@ -26,7 +26,7 @@ public class Member implements Serializable {
 	private Long id;
 	
 	@Basic(optional = false) 
-	@Column(name = "membership_number")
+	@Column(name = "membership_number", unique = true)
 	private String membershipNumber;
 	
 	@Basic(optional = false) 
