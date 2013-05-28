@@ -1,4 +1,6 @@
-var libraryServices = angular.module('libraryServices', [ 'ngResource' ]);
+'use strict';
+
+var libraryServices = angular.module('libraryApp.services', [ 'ngResource' ]);
 
 libraryServices.factory('bookService', function($resource) {
 	return $resource('api/books/:bookId', {}, {});

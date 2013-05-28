@@ -1,0 +1,19 @@
+'use strict';
+
+var libraryDirectives = angular.module('libraryApp.directives', []);
+
+libraryDirectives.directive('navbar', function(userService) {
+	return {
+		replace : true,
+		templateUrl : "partials/navbar.html",
+		link : function(scope, element, attrs) {
+			scope.fullName = userService.currentUser.name;
+			$(element).find('ul.nav li').each(function() {
+				if ($(this).hasClass(attrs.selected)) {
+					$(this).addClass('active');
+				}
+			});
+		}
+	};
+});
+

@@ -1,3 +1,5 @@
+'use strict';
+
 describe('Services', function() {
 	
 
@@ -17,23 +19,5 @@ describe('Services', function() {
 
 	});
 	
-
-	describe('bookService', function() {
-		
-		beforeEach(module('libraryServices'));
-		
-		it('should get from api/books', inject(function(bookService, $httpBackend) {
-			$httpBackend.expectGET('api/books').respond();
-			
-			bookService.query();
-
-			$httpBackend.flush();
-			$httpBackend.verifyNoOutstandingExpectation();
-			$httpBackend.verifyNoOutstandingRequest();
-			
-			
-		}));
-		
-	});
 	
 });

@@ -1,4 +1,6 @@
-var libraryApp = angular.module('library', [ 'libraryServices', 'ngCookies' ]);
+'use strict';
+
+var libraryApp = angular.module('libraryApp', [ 'libraryApp.services', 'libraryApp.directives', 'ngCookies' ]);
 
 libraryApp.config(function($routeProvider) {
 	$routeProvider.when('/login', {
@@ -23,14 +25,6 @@ libraryApp.config(function($routeProvider) {
 
 });
 
-libraryApp.run(function($rootScope, $location, userService) {
-	$rootScope.$on('$routeChangeStart', function(event, next, current) {
-		if (next.templateUrl !== "partials/login.html" && !userService.isLoggedIn()) {
-			$location.path('/login');
-		}
-	});
-});
-
 libraryApp.config(function($httpProvider) {
 	function errorInterceptor($q, $log, $location) {
 		function success(response) {
@@ -52,17 +46,11 @@ libraryApp.config(function($httpProvider) {
 
 });
 
-libraryApp.directive('navbar', function(userService) {
-	return {
-		replace : true,
-		templateUrl : "partials/navbar.html",
-		link : function(scope, element, attrs) {
-			scope.fullName = userService.currentUser.name;
-			$(element).find('ul.nav li').each(function() {
-				if ($(this).hasClass(attrs.selected)) {
-					$(this).addClass('active');
-				}
-			});
+libraryApp.run(function($rootScope, $location, userService) {
+	$rootScope.$on('$routeChangeStart', function(event, next, current) {
+		if (next.templateUrl !== "partials/login.html" && !userService.isLoggedIn()) {
+			$location.path('/login');
 		}
-	};
+	});
 });
+

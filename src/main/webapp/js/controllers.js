@@ -1,3 +1,5 @@
+'use strict';
+
 function LoginCtrl($scope, $http, $location, userService) {
 	$scope.login = function(user) {
 		$http.get("api/authenticate").success(function(data) {
