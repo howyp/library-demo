@@ -1,16 +1,20 @@
-'use strict';
+angular.module('library.services', [ 'ngResource' ])
 
-var libraryServices = angular.module('libraryApp.services', [ 'ngResource' ]);
-
-libraryServices.factory('bookService', function($resource) {
+.factory('bookService', function($resource) {
 	return $resource('api/books/:bookId', {}, {});
-});
+})
 
-libraryServices.factory('userService', function() {
-	return { 
-		currentUser : null,
-		isLoggedIn : function() {
-			return this.currentUser !== null;
+.service('userService', function() {
+	this.currentUser = null;
+	this.isLoggedIn = function() { return this.currentUser !== null; };
+})
+
+.factory('loginService', function($http) {
+	return {
+		setHeaders : function(username, password) {
+			$http.defaults.headers.common['Authorization'] = 'Basic ' + Base64.encode(username + ':' + password);
 		}
 	};
+	
 });
+

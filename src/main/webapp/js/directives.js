@@ -1,8 +1,6 @@
-'use strict';
+angular.module('library.directives', [])
 
-var libraryDirectives = angular.module('libraryApp.directives', []);
-
-libraryDirectives.directive('navbar', function(userService) {
+.directive('navbar', function(userService) {
 	return {
 		replace : true,
 		templateUrl : "partials/navbar.html",
@@ -15,5 +13,6 @@ libraryDirectives.directive('navbar', function(userService) {
 			});
 		}
 	};
+	
 });
 

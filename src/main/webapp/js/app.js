@@ -1,8 +1,6 @@
-'use strict';
+angular.module('library', [ 'library.services', 'library.filters', 'library.directives' ])
 
-var libraryApp = angular.module('libraryApp', [ 'libraryApp.services', 'libraryApp.directives', 'ngCookies' ]);
-
-libraryApp.config(function($routeProvider) {
+.config(function($routeProvider) {
 	$routeProvider.when('/login', {
 		controller : LoginCtrl,
 		templateUrl : 'partials/login.html'
@@ -23,9 +21,9 @@ libraryApp.config(function($routeProvider) {
 		redirectTo : '/books'
 	});
 
-});
+})
 
-libraryApp.config(function($httpProvider) {
+.config(function($httpProvider) {
 	function errorInterceptor($q, $log, $location) {
 		function success(response) {
 			return response;
@@ -44,13 +42,14 @@ libraryApp.config(function($httpProvider) {
 	}
 	$httpProvider.responseInterceptors.push(errorInterceptor);
 
-});
+})
 
-libraryApp.run(function($rootScope, $location, userService) {
+.run(function($rootScope, $location, userService) {
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
 		if (next.templateUrl !== "partials/login.html" && !userService.isLoggedIn()) {
 			$location.path('/login');
 		}
 	});
+
 });
 

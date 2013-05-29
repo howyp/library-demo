@@ -1,7 +1,6 @@
-'use strict';
-
-function LoginCtrl($scope, $http, $location, userService) {
+function LoginCtrl($scope, $http, $location, userService, loginService) {
 	$scope.login = function(user) {
+		loginService.setHeaders(user.username, user.password);
 		$http.get("api/authenticate").success(function(data) {
 			userService.currentUser = data;
 			$location.path("/books");
@@ -12,11 +11,6 @@ function LoginCtrl($scope, $http, $location, userService) {
 		});
 	};
 
-	$scope.$watch('user.username + user.password', function() {
-		if (_.isUndefined($scope.user)) return;
-        $http.defaults.headers.common.Authorization = 'Basic ' + Base64.encode($scope.user.username + ':' + $scope.user.password);
-    });
-	
 	$('#inputUsername').focus();
 
 }
@@ -66,7 +60,9 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 	};
 
 	$scope.remove = function(id) {
-		bookService.remove({ bookId : id }, function() {
+		bookService.remove({
+			bookId : id
+		}, function() {
 			$location.path("/books");
 		});
 	};

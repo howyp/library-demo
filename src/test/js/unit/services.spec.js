@@ -1,10 +1,8 @@
-'use strict';
-
 describe('Services', function() {
-	
 
 	describe('userService', function() {
-		beforeEach(module('libraryServices'));
+		
+		beforeEach(module('library.services'));
 		
 		it('should not be logged in', inject(function(userService) {
 			expect(userService.isLoggedIn()).toBe(false);
@@ -21,3 +19,4 @@ describe('Services', function() {
 	
 	
 });
+

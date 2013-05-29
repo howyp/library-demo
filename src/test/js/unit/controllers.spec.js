@@ -1,5 +1,3 @@
-'use strict';
-
 describe("Controller Tests", function() {
 
 	var books = [ {
@@ -19,7 +17,7 @@ describe("Controller Tests", function() {
 		var $httpBackend = null;
 		var $controller = null;
 
-		beforeEach(module('libraryServices'));
+		beforeEach(module('library.services'));
 
 		beforeEach(inject(function($rootScope, _$controller_, _$httpBackend_) {
 			$scope = $rootScope.$new();
@@ -154,6 +152,8 @@ describe("Controller Tests", function() {
 		var $httpBackend = null;
 		var $controller = null;
 
+		beforeEach(module('library.services'));
+
 		beforeEach(inject(function($rootScope, _$controller_, _$httpBackend_) {
 			$scope = $rootScope.$new();
 			$httpBackend = _$httpBackend_;
@@ -226,7 +226,7 @@ describe("Controller Tests", function() {
 		var $httpBackend = null;
 		var $controller = null;
 
-		beforeEach(module('libraryServices'));
+		beforeEach(module('library.services'));
 
 		beforeEach(inject(function($rootScope, _$controller_, _$httpBackend_) {
 			$scope = $rootScope.$new();

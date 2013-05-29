@@ -17,7 +17,6 @@ files = [
   'src/main/webapp/js/lib/angular-*.js',
   'src/main/webapp/js/lib/underscore-min.js',
   'src/main/webapp/js/lib/base64.js',
-  'src/main/webapp/js/app.js',
   'src/main/webapp/js/controllers.js',
   'src/main/webapp/js/services.js',
   'src/test/js/lib/angular-mocks.js',
