@@ -36,7 +36,7 @@ describe("Controller Tests", function() {
 		});
 		
 		beforeEach(function() {
-			$httpBackend.when('GET', 'api/books').respond( books );
+			$httpBackend.when('GET', '/api/books').respond( books );
 		});
 
 		afterEach(function() {
@@ -46,7 +46,7 @@ describe("Controller Tests", function() {
 		
 		it('loads all books when started', function() {
 
-			$httpBackend.expectGET('api/books').respond( books );
+			$httpBackend.expectGET('/api/books').respond( books );
 
 			$controller(BookListCtrl, {
 				$scope : $scope
@@ -68,7 +68,7 @@ describe("Controller Tests", function() {
 
 			$controller(BookListCtrl, { $scope : $scope });
 			
-			$httpBackend.expectGET('api/books?q=query').respond(books);
+			$httpBackend.expectGET('/api/books?q=query').respond(books);
 
 			$scope.query = 'query';
 			$scope.search($scope.query);
@@ -89,7 +89,7 @@ describe("Controller Tests", function() {
 
 			$controller(BookListCtrl, { $scope : $scope });
 			
-			$httpBackend.expectGET('api/books?q=').respond(books);
+			$httpBackend.expectGET('/api/books?q=').respond(books);
 
 			$scope.search('');
 			
@@ -178,7 +178,7 @@ describe("Controller Tests", function() {
 			$scope.user.username = "neil";
 			$scope.$apply('user');
 
-			$httpBackend.expectGET('api/authenticate', undefined, function(headers) {
+			$httpBackend.expectGET('/api/authenticate', undefined, function(headers) {
 				return headers['Authorization'] == 'ssss';
 			}).respond({ name : 'Me' });
 
@@ -205,7 +205,7 @@ describe("Controller Tests", function() {
 				userService : mockUserService
 			});
 
-			$httpBackend.expectGET('api/authenticate').respond(401, '');
+			$httpBackend.expectGET('/api/authenticate').respond(401, '');
 
 			$scope.login({
 				username : 'username',
@@ -235,7 +235,7 @@ describe("Controller Tests", function() {
 		}));
 		
 		beforeEach(function() {
-			$httpBackend.when('GET', 'api/books/1').respond({
+			$httpBackend.when('GET', '/api/books/1').respond({
 				id : 1,
 				title : "Domain-Driven Design",
 				isbn : "0-321-12521-5",
@@ -250,7 +250,7 @@ describe("Controller Tests", function() {
 
 		it('should load a book by id', inject(function($location) {
 
-			$httpBackend.expectGET('api/books/1').respond({});
+			$httpBackend.expectGET('/api/books/1').respond({});
 
 			$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 			
@@ -278,7 +278,7 @@ describe("Controller Tests", function() {
 
 			spyOn($location, 'path');
 			
-			$httpBackend.expectPOST('api/books').respond({});
+			$httpBackend.expectPOST('/api/books').respond({});
 
 			$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 
@@ -300,7 +300,7 @@ describe("Controller Tests", function() {
 
 			spyOn($location, 'path');
 			
-			$httpBackend.expectDELETE('api/books/1').respond({});
+			$httpBackend.expectDELETE('/api/books/1').respond({});
 
 			$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 
