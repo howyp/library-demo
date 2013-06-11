@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import com.zuhlke.angularjs.model.Staff;
 import com.zuhlke.angularjs.staff.StaffService;
 
-@WebFilter("/api/*")
+@WebFilter("/*")
 public class SecurityFilter implements Filter {
 
 	final Logger logger = LoggerFactory.getLogger(SecurityFilter.class);

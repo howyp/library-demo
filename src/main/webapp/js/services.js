@@ -1,7 +1,7 @@
 angular.module('library.services', [ 'ngResource' ])
 
 .factory('bookService', function($resource) {
-	return $resource('api/books/:bookId', {}, {});
+	return $resource('/api/books/:bookId', {}, {});
 })
 
 .service('userService', function() {

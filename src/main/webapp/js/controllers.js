@@ -1,7 +1,7 @@
 function LoginCtrl($scope, $http, $location, userService, loginService) {
 	$scope.login = function(user) {
 		loginService.setHeaders(user.username, user.password);
-		$http.get("api/authenticate").success(function(data) {
+		$http.get("/api/authenticate").success(function(data) {
 			userService.currentUser = data;
 			$location.path("/books");
 
