@@ -52,6 +52,19 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 		$scope.book = bookService.get({
 			bookId : id
 		});
+	
+	$scope.edit = function(id) {
+		$location.path("/books/" + id + "/edit");
+	};
+
+}
+
+function BookEditCtrl($scope, $routeParams, $location, bookService) {
+	var id = $routeParams.bookId;
+	if (!_.isUndefined(id))
+		$scope.book = bookService.get({
+			bookId : id
+		});
 
 	$scope.save = function(book) {
 		bookService.save(book, function() {

@@ -10,8 +10,12 @@ angular.module('library', [ 'library.services', 'library.filters', 'library.dire
 		templateUrl : 'partials/book-list.html'
 	
 	}).when('/books/new', {
-		controller : BookDetailCtrl,
-		templateUrl : 'partials/book-detail.html'
+		controller : BookEditCtrl,
+		templateUrl : 'partials/book-edit.html'
+
+	}).when('/books/:bookId/edit', {
+		controller : BookEditCtrl,
+		templateUrl : 'partials/book-edit.html'
 
 	}).when('/books/:bookId', {
 		controller : BookDetailCtrl,

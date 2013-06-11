@@ -1,4 +1,4 @@
-describe('BookDetailCtrl', function() {
+describe('BookEditCtrl', function() {
 	var $scope = null;
 	var $httpBackend = null;
 	var $controller = null;
@@ -29,7 +29,7 @@ describe('BookDetailCtrl', function() {
 
 		$httpBackend.expectGET('/api/books/1').respond({});
 
-		$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
+		$controller(BookEditCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 		
 		$httpBackend.flush();
 
@@ -41,7 +41,7 @@ describe('BookDetailCtrl', function() {
 
 	it('should load an empty book', inject(function($location) {
 
-		$controller(BookDetailCtrl, { $scope: $scope });
+		$controller(BookEditCtrl, { $scope: $scope });
 		
 		expect($scope.save).toBeDefined();
 		expect($scope.remove).toBeDefined();
@@ -57,7 +57,7 @@ describe('BookDetailCtrl', function() {
 		
 		$httpBackend.expectPOST('/api/books').respond({});
 
-		$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
+		$controller(BookEditCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 
 		$scope.save({
 			id : 1,
@@ -79,7 +79,7 @@ describe('BookDetailCtrl', function() {
 		
 		$httpBackend.expectDELETE('/api/books/1').respond({});
 
-		$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
+		$controller(BookEditCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 
 		$scope.remove(1);
 		
@@ -91,7 +91,7 @@ describe('BookDetailCtrl', function() {
 
 	it('should cancel', inject(function($location) {
 		spyOn($location, 'path');
-		$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
+		$controller(BookEditCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 		$httpBackend.flush();
 		$scope.cancel(1);
 		expect($location.path).toHaveBeenCalledWith('/books');
