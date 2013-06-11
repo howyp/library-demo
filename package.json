@@ -1,0 +1,9 @@
+{
+  "name": "library-demo-js",
+  "description": "library demo ported to node",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.2.6"
+  }
+}
