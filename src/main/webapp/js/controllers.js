@@ -68,7 +68,7 @@ function BookEditCtrl($scope, $routeParams, $location, bookService) {
 
 	$scope.save = function(book) {
 		bookService.save(book, function() {
-			$location.path("/books");
+			$location.path("/books/" + book.id);
 		});
 	};
 

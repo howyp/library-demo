@@ -68,7 +68,7 @@ describe('BookEditCtrl', function() {
 		
 		$httpBackend.flush();
 		
-		expect($location.path).toHaveBeenCalledWith('/books');
+		expect($location.path).toHaveBeenCalledWith('/books/1');
 
 		
 	}));
