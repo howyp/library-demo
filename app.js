@@ -12,7 +12,6 @@ app.get('/hello.txt', function(req, res){
 });
 
 app.listen(3000);
-console.log('Listening on port 3000');
 app.use(express.static(__dirname + '/src/main/webapp'))
 
 httpProxy.createServer({
@@ -22,3 +21,4 @@ httpProxy.createServer({
 		'/angular': '127.0.0.1:3000/' 
 	}
 }).listen(80);
+console.log('Listening on port 80');
