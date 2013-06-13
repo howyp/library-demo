@@ -28,4 +28,13 @@ describe("The library demo api", function() {
 						"isbn" : "3456789",
 						"author" : "Mark"}]).end(done);
 	});
+	it("be able to query for a specific book", function(done) {
+		request.get('/api/books/1')
+			   .expect('Content-Type', /json/)
+			   .expect(200)
+			   .expect({"id" : 1,
+						"title" : "Neil's Book",
+						"isbn" : "1234567",
+						"author" : "Neil"}).end(done);
+	});
 });
