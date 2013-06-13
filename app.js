@@ -29,6 +29,8 @@ app.get('/api/books', function(req, res) {
 });
 app.post('/api/books', function(req, res) {
 	var newId = 4;
+	if (!req.body.title || !req.body.isbn || !req.body.author)
+		res.send(400);
 	books.push({"id" : newId,
 				"title" : req.body.title,
 				"isbn" : req.body.isbn,

@@ -56,4 +56,49 @@ describe("The library demo api", function() {
 			   	        "author" : "Tim",
 			   	        "isbn" : "4567890"}).end(done);
 	});
+	it("does not create a book if the title is missing", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"author" : "Tim",
+			   	      "isbn" : "4567890"})
+			   .expect(400).end(done);
+	});
+	it("does not create a book if the author is missing", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "Tim's Book",
+			   	      "isbn" : "4567890"})
+			   .expect(400).end(done);
+	});
+	it("does not create a book if the isbn is missing", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "Tim's Book",
+			   	      "author" : "Tim"})
+			   .expect(400).end(done);
+	});
+	it("does not create a book if the title is empty", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "",
+			   	      "author" : "Tim",
+			   	      "isbn" : "4567890"})
+			   .expect(400).end(done);
+	});
+	it("does not create a book if the author is empty", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "Tim's Book",
+			   	      "author" : "",
+			   	      "isbn" : "4567890"})
+			   .expect(400).end(done);
+	});
+	it("does not create a book if the isbn is empty", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "Tim's Book",
+			   	      "author" : "Tim",
+			   	      "isbn" : ""})
+			   .expect(400).end(done);
+	});
 });
