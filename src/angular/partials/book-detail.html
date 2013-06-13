@@ -1,0 +1,16 @@
+<div data-navbar data-selected="create-book"></div>
+
+<dl class="dl-horizontal">
+  <dt>Title</dt><dd>{{book.title}}</dd>
+  <dt>Author</dt><dd>{{book.author}}</dd>
+  <dt>ISBN</dt><dd>{{book.isbn}}</dd>
+</dl>
+
+<form id="bookDetailForm" class="form-horizontal">
+  <div class="control-group">
+    <div class="controls">
+      <button type="button" class="btn" data-ng-click="edit(book.id)">Edit</button>
+    </div>
+  </div>  
+</form>
+
