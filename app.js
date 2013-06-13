@@ -19,39 +19,54 @@ books[3] = {"id" : 3,
 			"isbn" : "3456789",
 			"author" : "Mark"};
 
-app.get('/api/authenticate', function(req, res) {
+var user = {}; 
+user.load = function(req, res) {
 	res.send(200, {"name":"Neil Moorcroft",
 		   	       "id":1,
 		   	       "username":"neil"});
-});
-app.get('/api/books', function(req, res) {
+};
+var book = {};
+book.list = function(req, res) {
 	booksWithoutId = [];
 	for (var id in books) { booksWithoutId.push(books[id])}
 	res.send(200, booksWithoutId);
-});
-app.post('/api/books', function(req, res) {
-	var id = req.body.id || maxId(books) + 1;
-	if (!req.body.title || !req.body.isbn || !req.body.author)
-		res.send(400);
-	else {
-		books[id] = {"id" : id,
+};
+book.edit = function(req, res, next) {
+	if (!req.body.id) next();
+	else validateAndSave(req.body);
+};
+book.create = function(req, res) {
+	validateAndSave({"id" : maxId(books) + 1,
 					 "title" : req.body.title,
 					 "isbn" : req.body.isbn,
-					 "author" : req.body.author};
-		res.send(200, books);
-	}
-});
-app.get('/api/books/:id', function(req, res) {
+					 "author" : req.body.author});
+};
+book.loadById = function(req, res) {
 	var book = books[req.params.id];
 	if (!book) res.send(404, "Book not found");
 	else res.send(200, book);
-});
+};
+
+function validateAndSave(book) {
+	if (!book.id || !book.title || !book.isbn || !book.author)
+		res.send(400);
+	else {
+		books[book.id] = book;
+		res.send(200);
+	}
+}
 
 function maxId(books) {
 	var maxId = 0;
 	for (var id in books) { maxId = Math.max(maxId, id) }
 	return maxId;
 }
+
+app.get ('/api/authenticate', user.load);
+app.get ('/api/books',        book.list);
+app.post('/api/books',        book.edit, book.create);
+app.get ('/api/books/:id',    book.loadById);
+
 
 app.use('/angular', express.static(__dirname + '/src/main/webapp'))
 
