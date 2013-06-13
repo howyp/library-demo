@@ -4,8 +4,11 @@ var request = supertest(appUnderTest.app);
 
 describe("The library demo api", function() {
 	it("should allow the user to authenticate", function(done) {
-		request.get('/authenticate')
+		request.get('/api/authenticate')
 			   .expect('Content-Type', /json/)
-			   .expect(200, done);
+			   .expect(200)
+			   .expect({"name":"Neil Moorcroft",
+			   	        "id":1,
+			   	        "username":"neil"}, done);
 	});
 });
