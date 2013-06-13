@@ -30,7 +30,7 @@ app.get('/api/books', function(req, res) {
 	res.send(200, booksWithoutId);
 });
 app.post('/api/books', function(req, res) {
-	var id = req.body.id || 4;
+	var id = req.body.id || maxId(books) + 1;
 	if (!req.body.title || !req.body.isbn || !req.body.author)
 		res.send(400);
 	else {
@@ -46,6 +46,12 @@ app.get('/api/books/:id', function(req, res) {
 	if (!book) res.send(404, "Book not found");
 	else res.send(200, book);
 });
+
+function maxId(books) {
+	var maxId = 0;
+	for (var id in books) { maxId = Math.max(maxId, id) }
+	return maxId;
+}
 
 app.use('/angular', express.static(__dirname + '/src/main/webapp'))
 
