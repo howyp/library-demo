@@ -28,18 +28,20 @@ app.get('/api/books', function(req, res) {
 	res.send(200, books);
 });
 app.post('/api/books', function(req, res) {
-	var newId = 4;
+	var newId = req.body.id || 4;
 	if (!req.body.title || !req.body.isbn || !req.body.author)
 		res.send(400);
-	books.push({"id" : newId,
-				"title" : req.body.title,
-				"isbn" : req.body.isbn,
-				"author" : req.body.author});
-	res.send(200, books);
+	else {
+		books.push({"id" : newId,
+					"title" : req.body.title,
+					"isbn" : req.body.isbn,
+					"author" : req.body.author});
+		res.send(200, books);
+	}
 });
 app.get('/api/books/:id', function(req, res) {
 	var booksWithId = books.filter(function(book) {return book.id == req.params.id});
-	if (booksWithId.length == 0) res.send(404);
+	if (booksWithId.length == 0) res.send(404, "Book not found");
 	else res.send(200, booksWithId[0]);
 });
 
