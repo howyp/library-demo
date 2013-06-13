@@ -17,23 +17,12 @@ Get jasmine-node (for running nodejs tests)
 
 Get the grunt-cli runner
 ```
-	npm install -g grunt-cli
+	npm install grunt-cli -g
 ```
 
 Continuous tests
 ================
-
-You can run the Jasmine specs continuously while you develop by using the maven goal
-```
-	mvn jasmine:bdd
-```
-
-Results will be sent on a local web server as you add, remove and make changes to the watched source and spec folders.
-
-You can also run the api tests with jasmine-node by running
-```
-	jasmine-node src/test/js/unit/app.spec.js
-```
+???
 
 Debugging jasmine-node tests
 ============================

@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     		spec: "spec/api"
     	},
     	options: {
-    		forceexit: true
+    		// forceexit: true
     	}
     },
     jasmine: {

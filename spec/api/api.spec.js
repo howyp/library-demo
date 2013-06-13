@@ -99,13 +99,26 @@ describe("The library demo api", function() {
 			   	      "author" : "Tim",
 			   	      "isbn" : "4567890"})
 			   .expect(200).end(function() {});
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "Chris's Book",
+			   	      "author" : "Chris",
+			   	      "isbn" : "7890123"})
+			   .expect(200).end(function() {});
 		request.get('/api/books/4')
 			   .expect('Content-Type', /json/)
 			   .expect(200)
 			   .expect({"id" : 4,
 						"title" : "Tim's Book",
 			   	        "author" : "Tim",
-			   	        "isbn" : "4567890"}).end(done);
+			   	        "isbn" : "4567890"}).end(function() {});
+		request.get('/api/books/5')
+			   .expect('Content-Type', /json/)
+			   .expect(200)
+			   .expect({"id" : 5,
+					    "title" : "Chris's Book",
+			   	        "author" : "Chris",
+			   	        "isbn" : "7890123"}).end(done);
 	});
 	it("edits books", function(done) {
 		request.get('/api/books/1')
