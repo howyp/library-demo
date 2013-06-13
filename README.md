@@ -10,6 +10,11 @@ Get supervisor (for hot deploys):
    npm install supervisor -g
 ```
 
+Get jasmine-node (for running nodejs tests)
+```
+	npm install jasmine-node -g
+```
+
 Continuous tests
 ================
 
@@ -19,6 +24,9 @@ You can run the Jasmine specs continuously while you develop by using the maven 
 ```
 
 Results will be sent on a local web server as you add, remove and make changes to the watched source and spec folders.
+
+You can also run the api tests with jasmine-node by running
+
 
 
 Continuous Integration
