@@ -5,16 +5,6 @@ Download dependencies:
 ```
    npm install
 ```
-Get supervisor (for hot deploys):
-```
-   npm install supervisor -g
-```
-
-Get jasmine-node (for running nodejs tests)
-```
-	npm install jasmine-node -g
-```
-
 Get the grunt-cli runner
 ```
 	npm install grunt-cli -g
@@ -22,13 +12,16 @@ Get the grunt-cli runner
 
 Continuous tests
 ================
-???
+Run
+```
+	grunt watch
+```
+This will watch for all changes to spec and source javascript files in the development environment and rerun the specs in a new process each time it detects anything that changes.
 
 Debugging jasmine-node tests
 ============================
 
-This one is just super-fun.
-First, install the really cool node webkit debugger:
+Install the really cool node webkit debugger:
 ```
 	npm install node-inspector -g
 ```
