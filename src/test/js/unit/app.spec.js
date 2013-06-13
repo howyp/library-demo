@@ -3,7 +3,7 @@ var appUnderTest = require('./../../../../app.js');
 var request = supertest(appUnderTest.app);
 
 describe("The library demo api", function() {
-	it("should allow the user to authenticate", function(done) {
+	it("allows the user to authenticate", function(done) {
 		request.get('/api/authenticate')
 			   .expect('Content-Type', /json/)
 			   .expect(200)
@@ -11,7 +11,7 @@ describe("The library demo api", function() {
 			   	        "id" : 1,
 			   	        "username" : "neil"}).end(done);
 	});
-	it("have a list of books available", function(done) {
+	it("has a list of books available", function(done) {
 		request.get('/api/books')
 			   .expect('Content-Type', /json/)
 			   .expect(200)
@@ -27,5 +27,33 @@ describe("The library demo api", function() {
 						"title" : "Mark's Book",
 						"isbn" : "3456789",
 						"author" : "Mark"}]).end(done);
+	});
+	it("is able to query for a specific book", function(done) {
+		request.get('/api/books/1')
+			   .expect('Content-Type', /json/)
+			   .expect(200)
+			   .expect({"id" : 1,
+						"title" : "Neil's Book",
+						"isbn" : "1234567",
+						"author" : "Neil"}).end(done);
+	});
+	it("gives an error if a given book id does not exist", function(done) {
+		request.get('/api/books/9999')
+			   .expect(404).end(done);
+	});
+	it("creates new books", function(done) {
+		request.post('/api/books')
+			   .type('json')
+			   .send({"title" : "Tim's Book",
+			   	      "author" : "Tim",
+			   	      "isbn" : "4567890"})
+			   .expect(200).end(done);
+		request.get('/api/books/4')
+			   .expect('Content-Type', /json/)
+			   .expect(200)
+			   .expect({"id" : 4,
+						"title" : "Tim's Book",
+			   	        "author" : "Tim",
+			   	        "isbn" : "4567890"}).end(done);
 	});
 });
