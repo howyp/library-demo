@@ -5,13 +5,7 @@ var port = 80;
 
 var app = express();
 
-app.get('/api/authenticate', function(req, res) {
-	res.send(200, {"name":"Neil Moorcroft",
-		   	       "id":1,
-		   	       "username":"neil"});
-});
-app.get('/api/books', function(req, res) {
-	res.send(200, [{"id" : 1,
+var books = [{"id" : 1,
 					"title" : "Neil's Book",
 					"isbn" : "1234567",
 					"author" : "Neil"},
@@ -22,11 +16,21 @@ app.get('/api/books', function(req, res) {
 				   {"id" : 3,
 					"title" : "Mark's Book",
 					"isbn" : "3456789",
-					"author" : "Mark"}]);
+					"author" : "Mark"}]
+
+app.get('/api/authenticate', function(req, res) {
+	res.send(200, {"name":"Neil Moorcroft",
+		   	       "id":1,
+		   	       "username":"neil"});
+});
+app.get('/api/books', function(req, res) {
+	res.send(200, books);
 });
 
 app.use('/angular', express.static(__dirname + '/src/main/webapp'))
 
-app.listen(port);
-console.log("Started angular demo on http://localhost:" + port);
-exports.app = app;
+if (require.main === module) { 
+	app.listen(port);
+	console.log("Started angular demo on http://localhost:" + port);
+} 
+else exports.app = app;

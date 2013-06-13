@@ -9,10 +9,10 @@ describe("The library demo api", function() {
 			   .expect(200)
 			   .expect({"name" : "Neil Moorcroft",
 			   	        "id" : 1,
-			   	        "username" : "neil"}, done);
+			   	        "username" : "neil"}).end(done);
 	});
 	it("have a list of books available", function(done) {
-		request.get('/books')
+		request.get('/api/books')
 			   .expect('Content-Type', /json/)
 			   .expect(200)
 			   .expect([{"id" : 1,
@@ -26,6 +26,6 @@ describe("The library demo api", function() {
 					   {"id" : 3,
 						"title" : "Mark's Book",
 						"isbn" : "3456789",
-						"author" : "Mark"}], done);
+						"author" : "Mark"}]).end(done);
 	});
 });
