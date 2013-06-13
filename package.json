@@ -5,8 +5,13 @@
   "private": true,
   "dependencies": {
     "express": "3.2.6",
-    "http-proxy": "0.10.2",
     "jasmine-node": "1.8.1",
     "supertest": "0.7.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "supervisor": "0.5.2",
+    "node-inspector": "0.2.0beta4",
+    "grunt-contrib-jasmine": "~0.4.2"
   }
 }
