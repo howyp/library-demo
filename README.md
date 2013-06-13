@@ -15,6 +15,11 @@ Get jasmine-node (for running nodejs tests)
 	npm install jasmine-node -g
 ```
 
+Get the grunt-cli runner
+```
+	npm install -g grunt-cli
+```
+
 Continuous tests
 ================
 
