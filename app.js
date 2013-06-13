@@ -2,8 +2,8 @@ var http      = require('http');
 var express   = require('express');
 
 var port = 80;
-
 var app = express();
+app.use(express.bodyParser());
 
 var books = [];
 books.push({"id" : 1,
@@ -25,6 +25,14 @@ app.get('/api/authenticate', function(req, res) {
 		   	       "username":"neil"});
 });
 app.get('/api/books', function(req, res) {
+	res.send(200, books);
+});
+app.post('/api/books', function(req, res) {
+	var newId = 4;
+	books.push({"id" : newId,
+				"title" : req.body.title,
+				"isbn" : req.body.isbn,
+				"author" : req.body.author});
 	res.send(200, books);
 });
 app.get('/api/books/:id', function(req, res) {
