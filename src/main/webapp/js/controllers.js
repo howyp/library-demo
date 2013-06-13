@@ -46,13 +46,17 @@ function BookListCtrl($scope, $location, bookService) {
 
 }
 
-function BookDetailCtrl($scope, $routeParams, $location, bookService) {
-	var id = $routeParams.bookId;
-	if (!_.isUndefined(id))
+function BookShowCtrl($scope, $routeParams, bookService) {
+	this.id = $routeParams.bookId;
+	if (!_.isUndefined(this.id))
 		$scope.book = bookService.get({
-			bookId : id
+			bookId : this.id      
 		});
-	
+}
+
+function BookDetailCtrl($scope, $routeParams, $location, bookService) {
+	this.prototype = new BookShowCtrl($scope, $routeParams, bookService)
+
 	$scope.edit = function(id) {
 		$location.path("/books/" + id + "/edit");
 	};
@@ -60,11 +64,7 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 }
 
 function BookEditCtrl($scope, $routeParams, $location, bookService) {
-	var id = $routeParams.bookId;
-	if (!_.isUndefined(id))
-		$scope.book = bookService.get({
-			bookId : id
-		});
+	this.prototype = new BookShowCtrl($scope, $routeParams, bookService)
 
 	$scope.save = function(book) {
 		bookService.save(book, function() {

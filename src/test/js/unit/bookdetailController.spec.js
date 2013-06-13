@@ -29,13 +29,11 @@ describe('BookDetailCtrl', function() {
 
 		$httpBackend.expectGET('/api/books/1').respond({});
 
-		$controller(BookEditCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
+		$controller(BookDetailCtrl, { $scope: $scope, $routeParams: { bookId : 1 }});
 		
 		$httpBackend.flush();
 
-		expect($scope.save).toBeDefined();
-		expect($scope.remove).toBeDefined();
-		expect($scope.cancel).toBeDefined();
+		expect($scope.edit).toBeDefined();
 		
 	}));
 
