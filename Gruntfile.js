@@ -8,7 +8,7 @@ module.exports = function(grunt) {
     		spec: "spec/api"
     	},
     	options: {
-    		forceexit: true
+    		// forceexit: true
     	}
     },
     // jasmine: {
@@ -24,8 +24,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jasmine-node');
 
-  grunt.registerTask('test', ['jasmine_node']);
+  grunt.registerTask('test', ['jasmine-node']);
 
-  grunt.registerTask('default', ['jasmine_node']);
+  grunt.registerTask('default', ['jasmine-node']);
 
 };
