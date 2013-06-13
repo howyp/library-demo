@@ -1,2 +1,0 @@
-angular.module('library.filters', []);
-
