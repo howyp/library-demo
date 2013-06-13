@@ -29,3 +29,4 @@ app.use('/angular', express.static(__dirname + '/src/main/webapp'))
 
 app.listen(port);
 console.log("Started angular demo on http://localhost:" + port);
+exports.app = app;
