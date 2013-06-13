@@ -26,8 +26,9 @@ You can run the Jasmine specs continuously while you develop by using the maven 
 Results will be sent on a local web server as you add, remove and make changes to the watched source and spec folders.
 
 You can also run the api tests with jasmine-node by running
-
-
+```
+	jasmine-node src/test/js/unit/app.spec.js
+```
 
 Continuous Integration
 ======================
