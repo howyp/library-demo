@@ -1,5 +1,5 @@
 var supertest = require('supertest');
-var request = supertest('http://localhost:3000/api');
+var request = supertest('http://localhost:80/api');
 
 resultHandler = function(done) {
 	return function(err, res) {
