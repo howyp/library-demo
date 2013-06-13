@@ -28,7 +28,9 @@ app.get('/api/books', function(req, res) {
 	res.send(200, books);
 });
 app.get('/api/books/:id', function(req, res) {
-	res.send(200, books.filter(function(book) {return book.id == req.params.id})[0]);
+	var booksWithId = books.filter(function(book) {return book.id == req.params.id});
+	if (booksWithId.length == 0) res.send(404);
+	else res.send(200, booksWithId[0]);
 });
 
 app.use('/angular', express.static(__dirname + '/src/main/webapp'))

@@ -37,4 +37,8 @@ describe("The library demo api", function() {
 						"isbn" : "1234567",
 						"author" : "Neil"}).end(done);
 	});
+	it("give an error if a given book id does not exist", function(done) {
+		request.get('/api/books/9999')
+			   .expect(404).end(done);
+	});
 });
