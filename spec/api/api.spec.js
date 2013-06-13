@@ -1,5 +1,5 @@
 var supertest = require('supertest');
-var appUnderTest = require('./../../../../app.js');
+var appUnderTest = require('../../src/api/api.js');
 var request = supertest(appUnderTest.app);
 
 describe("The library demo api", function() {

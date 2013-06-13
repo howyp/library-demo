@@ -68,7 +68,7 @@ app.post('/api/books',        book.edit, book.create);
 app.get ('/api/books/:id',    book.loadById);
 
 
-app.use('/angular', express.static(__dirname + '/src/main/webapp'))
+app.use('/angular', express.static(__dirname + '/src/angular'))
 
 if (require.main === module) { 
 	app.listen(port);
