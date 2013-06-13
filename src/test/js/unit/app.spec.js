@@ -107,28 +107,28 @@ describe("The library demo api", function() {
 			   	        "author" : "Tim",
 			   	        "isbn" : "4567890"}).end(done);
 	});
-	// it("edits books", function(done) {
-	// 	request.get('/api/books/1')
-	// 		   .expect('Content-Type', /json/)
-	// 		   .expect(200)
-	// 		   .expect({"id" : 1,
-	// 					"title" : "Neil's Book",
-	// 					"isbn" : "1234567",
-	// 					"author" : "Neil"})
-	// 		   .end(function() {});;
-	// 	request.post('/api/books')
-	// 		   .type('json')
-	// 		   .send({"id" : 1,
-	// 		   		  "title" : "Martin's Book",
-	// 		   	      "author" : "Martin",
-	// 		   	      "isbn" : "5678901"})
-	// 		   .expect(200).end(function() {});
-	// 	request.get('/api/books')
-	// 		   .expect('Content-Type', /json/)
-	// 		   .expect(200)
-	// 		   .expect({"id" : 1,
-	// 		   		    "title" : "Martin's Book",
-	// 		   	        "author" : "Martin",
-	// 		   	        "isbn" : "5678901"}).end(done);
-	// });
+	it("edits books", function(done) {
+		request.get('/api/books/1')
+			   .expect('Content-Type', /json/)
+			   .expect(200)
+			   .expect({"id" : 1,
+						"title" : "Neil's Book",
+						"isbn" : "1234567",
+						"author" : "Neil"})
+			   .end(function() {});;
+		request.post('/api/books')
+			   .type('json')
+			   .send({"id" : 1,
+			   		  "title" : "Martin's Book",
+			   	      "author" : "Martin",
+			   	      "isbn" : "5678901"})
+			   .expect(200).end(function() {});
+		request.get('/api/books/1')
+			   .expect('Content-Type', /json/)
+			   .expect(200)
+			   .expect({"id" : 1,
+			   		    "title" : "Martin's Book",
+			   	        "author" : "Martin",
+			   	        "isbn" : "5678901"}).end(done);
+	});
 });
