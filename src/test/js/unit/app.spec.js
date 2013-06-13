@@ -13,6 +13,9 @@ describe("The library demo api", function() {
 		request.get('/authenticate')
 			   .expect('Content-Type', /json/)
 			   .expect(200)
+			   .expect({"name":"Neil Moorcroft",
+			   	        "id":1,
+			   	        "username":"neil"})
 		       .end(resultHandler(done));
 	});
 });
