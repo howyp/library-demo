@@ -14,6 +14,7 @@ module.exports = function(grunt) {
     	angular : {
     		src: 'src/angular/js/**/*.js',
     		options:  {
+          forceexit: true,
           vendor: [
               /* source libraries */
               "src/angular/js/lib/underscore-min.js",
@@ -32,11 +33,16 @@ module.exports = function(grunt) {
     			specs: 'spec/angular/**/*.spec.js'
     		}
     	}
+    },
+    watch: {
+      files: '**/*.js',
+      tasks: ['test']
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jasmine-node');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerTask('test', ['jasmine-node', 'jasmine:angular']);
 
