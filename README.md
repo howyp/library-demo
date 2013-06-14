@@ -37,6 +37,13 @@ In another window, run:
 
 and point a web browser at http://127.0.0.1:8080/debug?port=5858.
 
+Database backend
+================
+
+Using Super Modern Fast Webscale 2.0 persistence!!1
+
+(CouchDB on Erlang/OTP R15B03-1 | Version 1.3.0, available at http://www.apache.org/dyn/closer.cgi?path=/couchdb/binary/win/1.3.0/setup-couchdb-1.3.0_R15B03-1.exe)
+
 Continuous Integration
 ======================
 https://holyhaddock.ci.cloudbees.com/job/library-demo-js/
