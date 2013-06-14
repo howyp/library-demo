@@ -1,6 +1,6 @@
 module.exports = function(service) {
 
-	function validateAndSave(book, res) {
+	function validateAndSave(book) {
 		if (service.save(book))
 			res.send(200);
 		else {
@@ -17,14 +17,14 @@ module.exports = function(service) {
 
 		edit : function(req, res, next) {
 			if (!req.body.id) next();
-			else validateAndSave(req.body, res);
+			else validateAndSave(req.body);
 		},
 
 		create : function(req, res) {
 			validateAndSave({"id" : service.maxId() + 1,
 							 "title" : req.body.title,
 							 "isbn" : req.body.isbn,
-							 "author" : req.body.author}, res);
+							 "author" : req.body.author});
 		},
 
 		loadById : function(req, res) {

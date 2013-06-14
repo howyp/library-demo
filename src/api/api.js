@@ -14,7 +14,7 @@ app.post('/api/books',        bookEndpoint.edit, bookEndpoint.create);
 app.get ('/api/books/:id',    bookEndpoint.loadById);
 
 
-app.use('/angular', express.static('build/angular'))
+app.use('/angular', express.static(__dirname + '/src/angular'))
 
 if (require.main === module) { 
 	app.listen(port);

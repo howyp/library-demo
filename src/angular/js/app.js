@@ -1,6 +1,6 @@
 angular.module('library', [ 'library.services', 'library.filters', 'library.directives' ])
 
-.config(['$routeProvider', function($routeProvider) {
+.config(function($routeProvider) {
 	$routeProvider.when('/login', {
 		controller : LoginCtrl,
 		templateUrl : 'partials/login.html'
@@ -24,10 +24,11 @@ angular.module('library', [ 'library.services', 'library.filters', 'library.dire
 	}).otherwise({
 		redirectTo : '/books'
 	});
-}])
 
-.config(['$httpProvider', function($httpProvider) {
-	var errorInterceptor = ['$q', '$log', '$location',function errorInterceptor($q, $log, $location) {
+})
+
+.config(function($httpProvider) {
+	function errorInterceptor($q, $log, $location) {
 		function success(response) {
 			return response;
 		}
@@ -42,15 +43,17 @@ angular.module('library', [ 'library.services', 'library.filters', 'library.dire
 		return function(promise) {
 			return promise.then(success, error);
 		};
-	}];
+	}
 	$httpProvider.responseInterceptors.push(errorInterceptor);
-}])
 
-.run(['$rootScope', '$location', 'userService', function($rootScope, $location, userService) {
+})
+
+.run(function($rootScope, $location, userService) {
 	$rootScope.$on('$routeChangeStart', function(event, next, current) {
 		if (next.templateUrl !== "partials/login.html" && !userService.isLoggedIn()) {
 			$location.path('/login');
 		}
 	});
-}]);
+
+});
 
