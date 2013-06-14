@@ -37,15 +37,39 @@ module.exports = function(grunt) {
     watch: {
       files: '**/*.js',
       tasks: ['test']
+    },
+    uglify: {
+      options: {
+        banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+        beautify: true
+      },
+      build: {
+        files: {
+          'build/angular/js/app.min.js': ['src/angular/js/*.js']
+        }
+      }
+    },
+    copy: {
+      main: {
+        files: [{
+          expand: true,
+          cwd: 'src/angular/', 
+          src: ['*', 'css/**', 'img/**', 'partials/**', 'js/lib/**'], 
+          dest: 'build/angular/'
+        }]
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jasmine');
   grunt.loadNpmTasks('grunt-contrib-jasmine-node');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  grunt.loadNpmTasks('grunt-contrib-copy');
 
   grunt.registerTask('test', ['jasmine-node', 'jasmine:angular']);
+  grunt.registerTask('package', ['copy', 'uglify']);
 
-  grunt.registerTask('default', ['test']);
+  grunt.registerTask('default', ['test', 'package']);
 
 };

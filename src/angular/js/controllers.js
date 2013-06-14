@@ -1,4 +1,4 @@
-function LoginCtrl($scope, $http, $location, userService, loginService) {
+var LoginCtrl = function LoginCtrl($scope, $http, $location, userService, loginService) {
 	$scope.login = function(user) {
 		loginService.setHeaders(user.username, user.password);
 		$http.get("/api/authenticate").success(function(data) {
