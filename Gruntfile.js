@@ -51,14 +51,23 @@ module.exports = function(grunt) {
     },
     copy: {
       main: {
-        files: [{
-          expand: true,
-          cwd: 'src/angular/', 
-          src: ['*', 'css/**', 'img/**', 'partials/**', 'js/lib/**'], 
-          dest: 'build/angular/'
-        }]
+        files: [
+          {
+            expand: true,
+            cwd: 'src/angular/', 
+            src: ['*', 'css/**', 'img/**', 'partials/**', 'js/lib/**'], 
+            dest: 'build/angular/'
+          },
+          {
+            expand: true,
+            cwd: 'src/api/', 
+            src: ['**'], 
+            dest: 'build/api/'
+          }
+        ]
       }
-    }
+    },
+    clean: ["build"]
   });
 
   grunt.loadNpmTasks('grunt-contrib-jasmine');
@@ -66,6 +75,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('test', ['jasmine-node', 'jasmine:angular']);
   grunt.registerTask('package', ['copy', 'uglify']);
