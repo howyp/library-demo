@@ -66,8 +66,7 @@ module.exports = function(grunt) {
           }
         ]
       }
-    },
-    clean: ["build"]
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-jasmine');
@@ -75,7 +74,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('test', ['jasmine-node', 'jasmine:angular']);
   grunt.registerTask('package', ['copy', 'uglify']);

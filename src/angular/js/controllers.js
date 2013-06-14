@@ -12,10 +12,10 @@ var LoginCtrl = function LoginCtrl($scope, $http, $location, userService, loginS
 	};
 
 	$('#inputUsername').focus();
-
 }
+LoginCtrl.$inject = ['$scope', '$http', '$location', 'userService', 'loginService'];
 
-function BookListCtrl($scope, $location, bookService) {
+var BookListCtrl = function BookListCtrl($scope, $location, bookService) {
 	$scope.books = bookService.query();
 	$scope.query = '';
 
@@ -45,6 +45,7 @@ function BookListCtrl($scope, $location, bookService) {
 	};
 
 }
+BookListCtrl.$inject = ['$scope', '$location', 'bookService'];
 
 function BookShowCtrl($scope, $routeParams, bookService) {
 	this.id = $routeParams.bookId;
@@ -54,7 +55,7 @@ function BookShowCtrl($scope, $routeParams, bookService) {
 		});
 }
 
-function BookDetailCtrl($scope, $routeParams, $location, bookService) {
+var BookDetailCtrl = function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 	this.prototype = new BookShowCtrl($scope, $routeParams, bookService)
 
 	$scope.edit = function(id) {
@@ -62,8 +63,9 @@ function BookDetailCtrl($scope, $routeParams, $location, bookService) {
 	};
 
 }
+BookDetailCtrl.$inject = ['$scope', '$routeParams', '$location', 'bookService'];
 
-function BookEditCtrl($scope, $routeParams, $location, bookService) {
+var BookEditCtrl = function BookEditCtrl($scope, $routeParams, $location, bookService) {
 	this.prototype = new BookShowCtrl($scope, $routeParams, bookService)
 
 	$scope.save = function(book) {
@@ -87,3 +89,4 @@ function BookEditCtrl($scope, $routeParams, $location, bookService) {
 	$('#inputTitle').focus();
 
 }
+BookEditCtrl.$inject = ['$scope', '$routeParams', '$location', 'bookService'];
